@@ -1,0 +1,1 @@
+# Impliment the class Node as described in DD0130
