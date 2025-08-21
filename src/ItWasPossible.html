@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>It Was Possible</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #message {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Explosion animation */
+        .explode {
+            animation: boom 0.6s forwards;
+        }
+
+        @keyframes boom {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.5; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+
+        .newText {
+            opacity: 0;
+            transform: scale(0.5);
+            animation: fadeIn 0.6s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Image hidden at start */
+        #surpriseImage {
+            display: none;
+            width: 250px;
+            margin: 20px auto 0 auto; /* center horizontally */
+            opacity: 0;
+            display: block; /* makes margin auto work */
+        }
+
+        /* Spin animation */
+        .spinIn {
+            display: block !important;
+            animation: spinShow 1s forwards;
+        }
+
+        @keyframes spinShow {
+            0% { transform: rotate(-360deg) scale(0); opacity: 0; }
+            100% { transform: rotate(0deg) scale(1); opacity: 1; }
+        }
+    </style>
+    <script>
+        let clickCount = 0;
+
+        function makeImpossible() {
+            clickCount++;
+
+            const message = document.getElementById('message');
+            const image = document.getElementById('surpriseImage');
+
+            if (clickCount === 1) {
+                // First click: Boom text
+                message.classList.add('explode');
+
+                setTimeout(() => {
+                    message.textContent = "It was possible until the instructors said it's impossible.";
+                    message.classList.remove('explode');
+                    message.classList.add('newText');
+
+                    setTimeout(() => {
+                        message.classList.remove('newText');
+                    }, 600);
+                }, 600);
+            } else if (clickCount === 2) {
+                // Second click: Show spinning image
+                image.classList.add('spinIn');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <p id="message">It was possible</p>
+        <button onclick="makeImpossible()">💥 Surprise</button>
+        <img id="surpriseImage" src="a.jpg" alt="Surprise Image">
+    </div>
+</body>
+</html>

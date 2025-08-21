@@ -1,1 +1,0 @@
-# Implement the class CargoType as described in DD0130
